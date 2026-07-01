@@ -25,10 +25,10 @@ export default function Experience() {
               >
                 {/* Timeline dot */}
                 <div
-                  className="hidden md:flex flex-shrink-0 w-16 items-start justify-center pt-6"
+                  className="hidden md:flex shrink-0 w-16 items-start justify-center pt-6"
                 >
                   <div
-                    className="w-4 h-4 rotate-45 flex-shrink-0 bg-primary border-2 border-background"
+                    className="w-4 h-4 rotate-45 shrink-0 bg-primary border-2 border-background"
                     // style={{ backgroundColor: exp.color }}
                   />
                 </div>
@@ -44,7 +44,7 @@ export default function Experience() {
                         {exp.company}
                       </div>
                     </div>
-                    <div className="flex flex-col items-start sm:items-end gap-1 flex-shrink-0">
+                    <div className="flex flex-col items-start sm:items-end gap-1 shrink-0">
                       <span className="font-['Ovo'] text-xs font-semibold text-[#6B6560]  bg-background border border-primary px-2 py-0.5">
                         {exp.period}
                       </span>

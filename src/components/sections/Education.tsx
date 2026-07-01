@@ -39,7 +39,7 @@ export default function Education() {
                         {deg.institution}
                       </div>
                     </div>
-                    <span className="font-['Ovo'] text-xs font-semibold text-foreground dark:text-foreground bg-background dark:bg-[#3A3530] border border-foreground dark:border-foreground px-2 py-0.5 flex-shrink-0">
+                    <span className="font-['Ovo'] text-xs font-semibold text-foreground dark:text-foreground bg-background dark:bg-[#3A3530] border border-foreground dark:border-foreground px-2 py-0.5 shrink-0">
                       {deg.period}
                     </span>
                   </div>

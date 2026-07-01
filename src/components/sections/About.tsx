@@ -47,10 +47,10 @@ export default function About() {
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="brutal-btn bg-primary text-[#FAF7F2] px-6 py-3 inline-flex items-center gap-2"
+                className="brutal-btn bg-primary text-cream px-6 py-3 inline-flex items-center gap-2"
                 >
                 <span>Download CV</span>
-                <span className="text-[#FAF7F2]"><FaDownload /></span>
+                <span className="text-cream"><FaDownload /></span>
               </a>
             </div>
                 </div>
@@ -64,8 +64,8 @@ export default function About() {
                 className="reveal brutal-card p-4 flex items-start gap-4"
                 style={{ transitionDelay: `${i * 80 + 150}ms` }}
               >
-                <div className="w-10 h-10 bg-primary flex items-center justify-center flex-shrink-0 border-2 border-background rounded-full">
-                  <item.icon size={18} className="text-[#FAF7F2]" />
+                <div className="w-10 h-10 bg-primary flex items-center justify-center shrink-0 border-2 border-background rounded-full">
+                  <item.icon size={18} className="text-cream" />
                 </div>
                 <div>
                   <div className="font-['Ovo'] text-xs font-semibold text-[#6B6560] dark:text-[#A09890] uppercase tracking-widest">

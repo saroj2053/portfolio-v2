@@ -10,7 +10,7 @@ import getFlixGPTImage from "@/assets/project-images/getflixgpt.png";
 import webWizardsImage from "@/assets/project-images/webwizards.png";
 import rateMyUni from "@/assets/project-images/ratemyuni.png";
 import stronicsImage from "@/assets/project-images/stronics-image.png";
-import gitlabCICDAutomationToolImage from "@/assets/project-images/gitlab-cicd-automation-tool.png";
+import gitlabCICDAutomationToolImage from "@/assets/project-images/gitlab-CICD-automation-tool.png";
 import brightFutureAcademyImage from "@/assets/project-images/bright-future-academy-image.png";
 
 
