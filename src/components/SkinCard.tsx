@@ -1,5 +1,4 @@
 import { skinColors } from "@/data/skins";
-import { Check } from "lucide-react";
 
 const SkinCard = ({
   id,
