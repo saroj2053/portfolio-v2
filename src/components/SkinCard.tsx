@@ -15,17 +15,14 @@ const SkinCard = ({
   return (
     <button
       onClick={onSelect}
-      className={`group relative flex flex-col items-start gap-1.5 p-2.5 rounded-md border-2 transition-all duration-150 text-left w-full ${
+      className={`group relative flex items-center gap-1.5 p-2.5 rounded-md border-2 transition-all duration-150 text-left w-full ${
         active
           ? "border-primary bg-primary/10"
           : "border-border hover:border-primary/50 hover:bg-primary/5"
       }`}
     >
-      <div className="flex items-center gap-1 w-full">
-        <div className="flex-1 h-5 rounded-sm" style={{ background: c.primary }} />
-        {c.accent !== c.primary && (
-          <div className="flex-1 h-5 rounded-sm" style={{ background: c.accent }} />
-        )}
+      <div className="flex items-center gap-1 w-20">
+        <div className="flex-1 h-2 rounded-sm" style={{ background: c.primary }} />
       </div>
       <div className="flex items-center justify-between w-full">
         <span

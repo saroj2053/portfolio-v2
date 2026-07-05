@@ -1,4 +1,4 @@
-import { skinColors, skinList } from "@/data/skins";
+import { skinList } from "@/data/skins";
 import { useSkinStore } from "@/stores/skinStore";
 import { navLinks } from "@/constant";
 import { Menu, X } from "lucide-react";
@@ -96,8 +96,8 @@ const Navbar = () => {
                 <>
                   <div className="fixed inset-0 z-40" onClick={() => setSkinPickerOpen(false)} />
                     
-                  <div className="absolute right-0 top-12 z-50 w-110 border-2 border-border bg-background shadow-[4px_4px_0_var(--brutal-shadow)] p-3">
-                    <div className="grid grid-cols-5 gap-2">
+                  <div className="absolute right-0 top-12 z-50 w-56 border-2 border-border bg-background shadow-[4px_4px_0_var(--brutal-shadow)] p-3">
+                    <div className="grid grid-cols-1 gap-2">
                       {skinList.map((s) => (
                         <SkinCard
                           key={s.id}
@@ -131,7 +131,9 @@ const Navbar = () => {
           </button>
         </div>
       </header>
+      
 
+      {/* Mobile View */}
       {open && (
         <div className="fixed inset-0 z-40 bg-background flex flex-col pt-15 px-8 border-r-2 border-border md:hidden">
           <nav className="flex flex-col gap-6 mt-8">
@@ -145,36 +147,6 @@ const Navbar = () => {
               </button>
             ))}
           </nav>
-
-          <div className="mt-8 border-t border-border pt-6">
-            <p className="font-['Ovo'] text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-3">Theme</p>
-            <div className="grid grid-cols-5 gap-2">
-              {skinList.map((s) => {
-                const c = skinColors[s.id];
-                return (
-                  <button
-                    key={s.id}
-                    onClick={() => { setSkin(s.id as any); setOpen(false); }}
-                    className={`flex flex-col items-center gap-1 p-2 rounded-md border-2 transition-all ${
-                      skinId === s.id
-                        ? "border-primary bg-primary/10"
-                        : "border-border hover:border-primary/50"
-                    }`}
-                    aria-label={s.label}
-                  >
-                    <div className="w-full h-4 rounded-sm" style={{ background: c.primary }} />
-                    <span
-                      className={`font-['Ovo'] text-[10px] font-semibold text-center leading-tight ${
-                        skinId === s.id ? "text-primary" : "text-foreground"
-                      }`}
-                    >
-                      {s.label}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
 
           <a
             href="#contact"

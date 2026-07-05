@@ -8,6 +8,7 @@ import Hero from "@/components/sections/Hero";
 import Projects from "@/components/sections/Projects";
 import Skills from "@/components/sections/Skills";
 import { useEffect } from "react";
+import { Toaster } from "@/components/ui/sonner";
 
 const Home = () => {
 
@@ -49,6 +50,7 @@ const Home = () => {
         <Projects />
         <Education />
         <Contact />
+        <Toaster />
       </main>
       <Footer />
     </div>

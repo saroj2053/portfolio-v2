@@ -1,5 +1,5 @@
 import { ArrowDown } from "lucide-react";
-import {FaGithub as Github, FaLinkedin as Linkedin} from "react-icons/fa";
+import {LuGithub as Github, LuLinkedin as Linkedin} from "react-icons/lu";
 
 const PORTRAIT_URL = "https://placehold.co/376x476";
 const BG_TEXTURE_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663753371575/7XhrMebuYRmQUniDac4V8W/hero-bg-texture-Esxrhg7JLGqdSJWpgXBtvm.webp";

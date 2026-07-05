@@ -1,42 +1,13 @@
-import { Mail, MapPin, Phone, Send } from "lucide-react";
-import { useState } from "react";
+import { Send } from "lucide-react";
 import { toast } from "sonner";
 import SectionHeader from "../SectionHeader";
-import {LuGithub as Github, LuLinkedin as Linkedin} from "react-icons/lu";
-
-const contactInfo = [
-  { icon: Mail, label: "Email", value: "sarojsaroj390@gmail.com", href: "mailto:sarojsaroj390@gmail.com" },
-  { icon: Phone, label: "Phone", value: "+49 (123) 456-7890", href: "tel:+491234567890" },
-  { icon: MapPin, label: "Location", value: "Chemnitz, Germany", href: "#" },
-];
-
-const socials = [
-  { icon: Github, href: "https://github.com", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-];
+import formValidationSchema from "@/lib/validation";
+import {Formik} from "formik";
+import emailjs from "@emailjs/browser";
+import FormInput from "../FormInput";
+import { contactInfo, socials } from "@/constant";
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
-  const [sending, setSending] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
-      toast.error("Please fill in all required fields.");
-      return;
-    }
-    setSending(true);
-    // Simulate sending
-    await new Promise((r) => setTimeout(r, 1200));
-    setSending(false);
-    toast.success("Message sent! I'll get back to you within 24 hours.");
-    setForm({ name: "", email: "", subject: "", message: "" });
-  };
-
   return (
     <section id="contact" className="py-24 bg-secondary">
       <div className="max-w-6xl mx-auto px-6">
@@ -99,78 +70,91 @@ export default function Contact() {
           </div>
 
           {/* RIGHT — Form */}
+
           <div className="lg:col-span-3">
-            <form
+            <Formik initialValues = {{ name: "", email: "", subject: "", message: "" }} validationSchema={formValidationSchema} onSubmit={(values, { setSubmitting, resetForm }) => {
+              const serviceId = "service_8c3p1iq";
+              const templateId = "template_ajyhcpi";
+              const publicKey = "uV3e4sbtIIM3oFHbB";
+
+              const templateParams = {
+                from_name: values.name,
+                from_email: values.email,
+                to_name: "Saroj Sah",
+                subject: values.subject,
+                message: values.message,
+              };
+              emailjs.send(serviceId, templateId, templateParams, publicKey).then((response) => { 
+                console.log(response); 
+                toast.success(
+                  "Message sent! I'll get back to you within 24 hours."
+                ); 
+                resetForm(); 
+              })
+              .catch((error) => { toast.error(`Error sending email ${error}`) })
+              .finally(() => { setSubmitting(false); });
+             
+            }}
+            >
+              {({handleChange, handleBlur, isSubmitting, errors, values, touched, handleSubmit}) => (
+                <form
               onSubmit={handleSubmit}
               className="reveal brutal-card p-8 bg-primary-foreground dark:bg-primary-foreground space-y-4"
               style={{ transitionDelay: "150ms" }}
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="font-['Ovo'] text-xs font-semibold text-[#6B6560] dark:text-[#A09890] uppercase tracking-widest block mb-2">
-                    Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={form.name}
-                    onChange={handleChange}
-                    placeholder="Your name"
-                    className="w-full border-2 border-foreground  bg-secondary dark:bg-secondary px-3 py-2.5 font-['Google_Sans_Flex'] text-foreground  placeholder:text-[#A09890] dark:placeholder:text-[#6B6560] focus:outline-none focus:border-primary dark:focus:border-primary transition-colors"
-                    required
-                  />
+                  <FormInput 
+                    label="Name" 
+                    name="name" 
+                    type="text" 
+                    placeholder="Your Name" 
+                    value={values.name} 
+                    onChange={handleChange} 
+                    onBlur={handleBlur} 
+                    error={touched.name && errors.name ? errors.name : null} />
                 </div>
                 <div>
-                  <label className="font-['Ovo'] text-xs font-semibold text-[#6B6560] dark:text-[#A09890] uppercase tracking-widest block mb-2">
-                    Email <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="your@email.com"
-                    className="w-full border-2 border-foreground bg-secondary dark:bg-secondary px-3 py-2.5 font-['Google_Sans_Flex']   text-foreground  placeholder:text-[#A09890] dark:placeholder:text-[#6B6560] focus:outline-none focus:border-primary dark:focus:border-primary transition-colors"
-                    required
-                  />
-                </div>
+                  <FormInput 
+                    label="Email" 
+                    name="email" 
+                    type="email" 
+                    placeholder="your@email.com" 
+                    value={values.email} 
+                    onChange={handleChange} 
+                    onBlur={handleBlur} 
+                    error={touched.email && errors.email ? errors.email : null} />
+                  </div>
               </div>
 
-              <div className="mb-4">
-                <label className="font-['Ovo'] text-xs font-semibold text-[#6B6560] dark:text-[#A09890] uppercase tracking-widest block mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={form.subject}
-                  onChange={handleChange}
-                  placeholder="What's this about?"
-                  className="w-full border-2 border-foreground  bg-secondary dark:bg-secondary px-3 py-2.5 font-['Google_Sans_Flex']   text-foreground  placeholder:text-[#A09890] dark:placeholder:text-[#6B6560] focus:outline-none focus:border-primary dark:focus:border-primary transition-colors"
-                />
-              </div>
-
-              <div className="mb-6">
-                <label className="font-['Ovo'] text-xs font-semibold text-[#6B6560] dark:text-[#A09890] uppercase tracking-widest block mb-2">
-                  Message <span className="text-red-500">*</span>
-                </label>
-                <textarea
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  placeholder="Tell me about your project or idea..."
-                  rows={5}
-                  className="w-full border-2 border-foreground  bg-secondary dark:bg-secondary px-3 py-2.5 font-['Google_Sans_Flex']   text-foreground  placeholder:text-[#A09890] dark:placeholder:text-[#6B6560] focus:outline-none focus:border-primary dark:focus:border-primary transition-colors resize-none"
-                  required
-                />
-              </div>
+              <FormInput
+                label="Subject"
+                name="subject"
+                type="text"
+                placeholder="What's this about?"
+                value={values.subject}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.subject && errors.subject ? errors.subject : null}
+              />
+         
+              <FormInput
+                label="Message"
+                name="message"
+                type="textarea"
+                placeholder="Tell me about your project or idea..."
+                value={values.message}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.message && errors.message ? errors.message : null}
+              />
 
               <button
                 type="submit"
-                disabled={sending}
+                disabled={isSubmitting || Object.keys(errors).length > 0}
                 className="brutal-btn bg-primary dark:bg-primary text-cream px-8 py-3 w-full flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {sending ? (
+                {isSubmitting ? (
                   <>
                     <span className="animate-spin">⟳</span>
                     Sending...
@@ -183,6 +167,8 @@ export default function Contact() {
                 )}
               </button>
             </form>
+              )}
+            </Formik>
           </div>
         </div>
       </div>
