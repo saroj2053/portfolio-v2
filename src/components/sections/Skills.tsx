@@ -8,7 +8,7 @@ function SkillBar({ name, level, color, darkColor, delay }: { name: string; leve
   const [animated, setAnimated] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const skinId = useSkinStore((s) => s.skinId);
-  const isDark = skinId === "desert-night" || skinId === "ocean" || skinId === "midnight";
+  const isDark = skinId === "desert-night" || skinId === "discord";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
