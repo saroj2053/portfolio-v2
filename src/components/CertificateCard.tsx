@@ -3,9 +3,12 @@ import type { Certificate } from '@/types'
 const CertificateCard = ({ cert, index } : { cert: Certificate, index: number }) => {
   return (
     
-    <div
+    <a
                   key={cert.name}
-                  className="reveal brutal-card-accent p-5"
+                  href={cert.pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block reveal brutal-card-accent p-5 cursor-pointer"
                   style={{ transitionDelay: `${index * 100 + 100}ms` }}
                 >
                   {/* Badge */}
@@ -21,7 +24,7 @@ const CertificateCard = ({ cert, index } : { cert: Certificate, index: number })
                   <div className="font-['Ovo'] text-xs font-semibold text-primary">
                     {cert.year}
                   </div>
-                </div>
+                </a>
   )
 }
 

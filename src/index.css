@@ -210,13 +210,17 @@
 
   .brutal-card-accent {
     border: 2.5px solid var(--brutal-border);
-    box-shadow: 4px 4px 0px var(--brutal-accent-shadow);
+    box-shadow: 3px 3px 0px var(--brutal-accent-shadow);
     transition: box-shadow 150ms var(--ease-out), transform 150ms var(--ease-out);
     background: var(--brutal-card-bg);
   }
   .brutal-card-accent:hover {
-    box-shadow: 2px 2px 0px var(--brutal-accent-shadow);
+    box-shadow: 1px 1px 0px var(--brutal-accent-shadow);
     transform: translate(2px, 2px);
+  }
+  .brutal-card-accent:active {
+    box-shadow: 0px 0px 0px var(--brutal-accent-shadow);
+    transform: translate(3px, 3px);
   }
 
   .brutal-btn {
